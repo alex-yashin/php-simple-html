@@ -1,0 +1,25 @@
+{
+  "name": "alex-yashin/php-simple-html",
+  "keywords": ["php", "html"],
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Yashin",
+      "email": "alex@alex-yashin.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SimpleHtml\\": "src/"
+    }
+  }
+}
