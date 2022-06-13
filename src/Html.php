@@ -81,12 +81,10 @@ class Html extends BaseHtml
      * @return string
      * @throws \Exception
      */
-    public static function zz($template, $item = '')
+    public static function zz($template, ...$items)
     {
         $zz = new ZZ($template);
-        $args = func_get_args();
-        array_shift($args);
-        return $zz->run($args);
+        return $zz->run($items);
     }
 
 }
