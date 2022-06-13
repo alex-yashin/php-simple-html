@@ -41,3 +41,16 @@ echo Html::nest('.step/.circle+p', 10, ['class' => 'active'])
 ```php
 Html::zz($template, ...$items)
 ```
+
+Более сложный шаблонизатор, который работает не только с одной цепочкой вложенных тегов, но и может моделировать сложное дерево тегов. Для этого отношение иерархии задаются с помощью скобок, а места для подстановок задаются символами %. Отношение соседства задаются как и в случае с nest через символ +.
+
+```php
+echo Html::zz('.circle([data-name=%]+.round%+p)+span%', 'step', 10, 20);
+//<div class="circle"><div data-name="step"></div><div class="round">10</div><p></p></div><span>20</span>
+```
+
+Использовать можно и для генерации одного тега с подстановками для аттрибутов
+```php
+echo Html::zz('input.quantity-field[type=number][name=quantity][step=1][readonly][data-sku=%]', 'SKU');
+//<input type="number" class="quantity-field" name="quantity" readonly="readonly" step="1" data-sku="SKU">
+```
