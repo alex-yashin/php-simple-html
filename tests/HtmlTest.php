@@ -93,4 +93,16 @@ class HtmlTest extends TestCase
         );
     }
 
+    public function testTags()
+    {
+        $r = Html::br();
+        $this->assertEquals('<br>', $r);
+
+        $r = Html::li('point', ['class' => 'active']);
+        $this->assertEquals('<li class="active">point</li>', $r);
+
+        $r = Html::p('test', ['class' => 'description']);
+        $this->assertEquals('<p class="description">test</p>', $r);
+    }
+
 }

@@ -54,3 +54,20 @@ echo Html::zz('.circle([data-name=%]+.round%+p)+span%', 'step', 10, 20);
 echo Html::zz('input.quantity-field[type=number][name=quantity][step=1][readonly][data-sku=%]', 'SKU');
 //<input type="number" class="quantity-field" name="quantity" readonly="readonly" step="1" data-sku="SKU">
 ```
+
+### Html::br
+
+Просто выводит тег ```<br>```
+
+```php
+echo Html::br();
+//<br>
+```
+
+### Html::li
+
+```php
+Html::li($content = '', $options = []);
+```
+
+Генерирует тег ```<li>```
