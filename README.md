@@ -19,6 +19,8 @@ echo Html::nest('div#my-wrapper/a#my.link[href=#][title=my link]')
 
 Упоминания тега div может быть опущено, если есть ID, класс или аттрибуты. 
 Параметр $content размещается в содержимом самого глубокого тега цепочки.
+Отношение соседства на одном уровне вложенности задается через символ +,
+цепочка продолжается от замыкающего тега в соседстве.
 ```php
 echo Html::nest('.step/.circle+p', 10) 
 //<div class="step"><div class="circle"></div><p>10</p></div>
@@ -71,3 +73,7 @@ Html::li($content = '', $options = []);
 ```
 
 Генерирует тег ```<li>```
+```php
+echo Html::li('test', ['class' => 'active']);
+//<li class="active">test</li>
+```
