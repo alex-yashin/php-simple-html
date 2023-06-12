@@ -29,7 +29,7 @@ class Html extends BaseHtml
             while ($s = array_shift($siblings)) {
                 $options = [];
                 $left = strlen($s);
-                if (preg_match_all('/(([#.])([\w\-_ =]+))|(\[([#\w\-_ =]+)\])/si', $s, $matches)) {
+                if (preg_match_all('/(([#.])([\w\-_ =]+))|(\[([#\w\-_ =.]+)\])/si', $s, $matches)) {
                     foreach ($matches[0] as $k => $full) {
                         $left = min($left, strpos($s, $full));
                         $prefix = !empty($matches[2][$k]) ? $matches[2][$k] : '[';
@@ -45,7 +45,7 @@ class Html extends BaseHtml
                             case '[':
                                 $parts = explode('=', $matches[5][$k]);
                                 $prop = $parts[0];
-                                $value = $parts[1] ?? $prop;
+                                $value = isset($parts[1]) ? $parts[1] : $prop;
                                 break;
                         }
                         if ($prop) {
@@ -77,14 +77,16 @@ class Html extends BaseHtml
 
     /**
      * @param string $template
-     * @param $item
+     * @param string $item
      * @return string
      * @throws \Exception
      */
-    public static function zz($template, ...$items)
+    public static function zz(string $template, ?string $item = ''): string
     {
         $zz = new ZZ($template);
-        return $zz->run($items);
+        $args = func_get_args();
+        array_shift($args);
+        return $zz->run($args);
     }
 
 }

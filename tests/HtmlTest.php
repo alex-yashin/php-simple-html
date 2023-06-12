@@ -29,6 +29,12 @@ class HtmlTest extends TestCase
             $r
         );
 
+        $r = Html::nest("a.icon icon-burger mobile[href=#][data-toggle-modal=nav.side]/span");
+        $this->assertEquals(
+            '<a class="icon icon-burger mobile" href="#" data-toggle-modal="nav.side"><span></span></a>',
+            $r
+        );
+
         $r = Html::nest('div/span[data-name=test]', 'hello!');
         $this->assertEquals('<div><span data-name="test">hello!</span></div>', $r);
 
@@ -63,6 +69,9 @@ class HtmlTest extends TestCase
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function testZZ()
     {
         $r = Html::zz('input.quantity-field[type=number][name=quantity][step=1][readonly][data-sku=%]', 'SKU');
@@ -91,6 +100,36 @@ class HtmlTest extends TestCase
             '<div class="step"><div class="circle"></div><div class="round">10</div><p></p></div><span>20</span>',
             $r
         );
+
+        $r = Html::zz(
+            'circle#gray_circle[r=16][cx=19][cy=19][fill=transparent][stroke-dasharray=565.48][stroke-dashoffset=0]'
+        );
+        $this->assertEquals(
+            '<circle id="gray_circle" r="16" cx="19" cy="19" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>',
+            $r
+        );
+
+        $r = Html::zz("a.logo[href=/](img[src=/img/logo.gif])");
+        $this->assertEquals('<a class="logo" href="/"><img src="/img/logo.gif"></a>', $r);
+
+        $r = Html::zz('.buttons(button.link[data-close-modal]%+button.btn btn-primary%)', 'Cancel', 'Save');
+        $this->assertEquals(
+            '<div class="buttons"><button class="link" data-close-modal="data-close-modal">Cancel</button><button class="btn btn-primary">Save</button></div>',
+            $r
+        );
+
+        $r = Html::zz('.test%');
+        $this->assertEquals('<div class="test"></div>', $r);
+
+        $r = Html::zz('input[type=checkbox][checked=%]', 'checked');
+        $this->assertEquals('<input type="checkbox" checked="checked">', $r);
+
+        $r = Html::zz('input[type=checkbox][checked=%]', '');
+        $this->assertEquals('<input type="checkbox" checked="">', $r);
+
+        //сбрасываем в принципе аттрибут checked
+        $r = Html::zz('input[type=checkbox][checked=%]', null);
+        $this->assertEquals('<input type="checkbox">', $r);
     }
 
     public function testTags()
