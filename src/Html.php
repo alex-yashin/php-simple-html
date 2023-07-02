@@ -20,6 +20,15 @@ class Html extends BaseHtml
         return static::tag('p', $content, $options);
     }
 
+    public static function renderTagAttributes($attributes)
+    {
+        if (isset($attributes['class']) && empty($attributes['class'])) {
+            unset($attributes['class']);
+        }
+
+        return parent::renderTagAttributes($attributes);
+    }
+
     public static function nest($path, $content = '', $rootOptions = [])
     {
         $pathParts = explode('/', $path);
